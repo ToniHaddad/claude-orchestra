@@ -1,0 +1,21 @@
+#!/bin/sh
+# This repo is public. Refuses a commit when a tracked file holds a word from
+# the private list: one pattern per line (extended regex, any case), kept
+# outside the repo so the list itself is never published.
+#   list: $ORCHESTRA_PRIVATE_WORDS, or ~/.orchestra/private-words.txt
+#   turn on once per clone: git config core.hooksPath .githooks
+list="${ORCHESTRA_PRIVATE_WORDS:-$HOME/.orchestra/private-words.txt}"
+if [ ! -f "$list" ]; then
+  echo "pre-commit: no private-word list at $list, so nothing was checked." >&2
+  exit 0
+fi
+patterns=$(mktemp)
+trap 'rm -f "$patterns"' EXIT
+grep -v -e '^[[:space:]]*$' -e '^#' "$list" | tr -d '\r' > "$patterns"
+[ -s "$patterns" ] || exit 0
+if hits=$(git grep --cached -n -I -i -E -f "$patterns"); then
+  echo "pre-commit: private words found in staged files. Remove them, then commit again:" >&2
+  echo "$hits" | cut -c1-160 >&2
+  exit 1
+fi
+exit 0

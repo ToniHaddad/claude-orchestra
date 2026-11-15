@@ -1,0 +1,8 @@
+# What the mod writes while it runs: memory, tracker lines, staging folders.
+.orchestra/
+node_modules/
+*.log
+.env
+.env.*
+.DS_Store
+Thumbs.db

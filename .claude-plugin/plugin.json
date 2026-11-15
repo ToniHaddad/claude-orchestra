@@ -1,0 +1,9 @@
+{
+  "name": "orchestra",
+  "version": "0.5.0",
+  "author": { "name": "Toni Haddad" },
+  "description": "Claude as conductor in every session: routes each task to the right Claude, Codex or Gemini model, reviews the result, and keeps a shared memory and tracker.",
+  "homepage": "https://github.com/ToniHaddad/claude-orchestra",
+  "license": "MIT",
+  "types": "./types/index.d.ts"
+}

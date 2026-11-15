@@ -1,0 +1,5 @@
+{
+  "name": "orchestra-mods",
+  "owner": { "name": "Toni Haddad" },
+  "plugins": [{ "name": "orchestra", "source": "./" }]
+}
