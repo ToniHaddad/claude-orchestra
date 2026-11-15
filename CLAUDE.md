@@ -41,11 +41,20 @@ project, is a change to this repo, not a note in memory:
    tested (the routing text is checked with `toContain`).
 4. `claude plugin test` must pass.
 5. Raise `version` in `.claude-plugin/plugin.json` (patch for wording, minor
-   for behaviour). The installed copy is only replaced when the version
-   changes.
+   for behaviour).
 6. Branch, conventional commit, PR, merge, push.
-7. `claude plugin marketplace update orchestra-mods`, then
-   `claude plugin update orchestra@orchestra-mods`. New sessions use it.
+7. Check out `main` again and pull. New sessions use the change;
+   `/reload-plugins` brings it into an open one.
+
+## The clone is the install
+
+Where the mod is installed from a local folder (`claude plugin list` shows
+"Read from: <this folder>"), every new session loads whatever is checked out
+here, committed or not. So:
+
+- Run `claude plugin test` before you stop, on any branch. A file that does
+  not load breaks the routing in every new session.
+- Leave `main` checked out when the work is done.
 
 ## Layout
 
